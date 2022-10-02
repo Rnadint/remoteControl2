@@ -26,6 +26,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6F47449E28EA0CA100F98F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F76C1D528E907B600BBA419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F76C1DC28E907B600BBA419;
+			remoteInfo = remoteControl2;
+		};
+		6F4744A028EA0CA400F98F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F76C1D528E907B600BBA419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F76C1DC28E907B600BBA419;
+			remoteInfo = remoteControl2;
+		};
+		6F4744A228EA0CD200F98F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F76C1D528E907B600BBA419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F76C20228E907B700BBA419;
+			remoteInfo = "remoteControl2 Watch App";
+		};
+		6F4744A428EA0CD800F98F3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F76C1D528E907B600BBA419 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F76C20228E907B700BBA419;
+			remoteInfo = "remoteControl2 Watch App";
+		};
 		6F76C1EE28E907B700BBA419 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6F76C1D528E907B600BBA419 /* Project object */;
@@ -280,6 +308,7 @@
 			);
 			dependencies = (
 				6F76C1EF28E907B700BBA419 /* PBXTargetDependency */,
+				6F4744A528EA0CD800F98F3A /* PBXTargetDependency */,
 			);
 			name = remoteControl2Tests;
 			productName = remoteControl2Tests;
@@ -298,6 +327,7 @@
 			);
 			dependencies = (
 				6F76C1F928E907B700BBA419 /* PBXTargetDependency */,
+				6F4744A328EA0CD200F98F3A /* PBXTargetDependency */,
 			);
 			name = remoteControl2UITests;
 			productName = remoteControl2UITests;
@@ -333,6 +363,7 @@
 			);
 			dependencies = (
 				6F76C21728E907B700BBA419 /* PBXTargetDependency */,
+				6F4744A128EA0CA400F98F3A /* PBXTargetDependency */,
 			);
 			name = "remoteControl2 Watch AppTests";
 			productName = "remoteControl2 Watch AppTests";
@@ -351,6 +382,7 @@
 			);
 			dependencies = (
 				6F76C22128E907B700BBA419 /* PBXTargetDependency */,
+				6F47449F28EA0CA100F98F3A /* PBXTargetDependency */,
 			);
 			name = "remoteControl2 Watch AppUITests";
 			productName = "remoteControl2 Watch AppUITests";
@@ -520,6 +552,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6F47449F28EA0CA100F98F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F76C1DC28E907B600BBA419 /* remoteControl2 */;
+			targetProxy = 6F47449E28EA0CA100F98F3A /* PBXContainerItemProxy */;
+		};
+		6F4744A128EA0CA400F98F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F76C1DC28E907B600BBA419 /* remoteControl2 */;
+			targetProxy = 6F4744A028EA0CA400F98F3A /* PBXContainerItemProxy */;
+		};
+		6F4744A328EA0CD200F98F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F76C20228E907B700BBA419 /* remoteControl2 Watch App */;
+			targetProxy = 6F4744A228EA0CD200F98F3A /* PBXContainerItemProxy */;
+		};
+		6F4744A528EA0CD800F98F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F76C20228E907B700BBA419 /* remoteControl2 Watch App */;
+			targetProxy = 6F4744A428EA0CD800F98F3A /* PBXContainerItemProxy */;
+		};
 		6F76C1EF28E907B700BBA419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6F76C1DC28E907B600BBA419 /* remoteControl2 */;
@@ -662,6 +714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"remoteControl2 Watch App/Preview Content\"";
@@ -675,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rnadint.remoteControl2.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -692,6 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"remoteControl2 Watch App/Preview Content\"";
@@ -705,7 +759,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rnadint.remoteControl2.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -724,6 +778,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"remoteControl2/Preview Content\"";
@@ -731,6 +786,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = remoteControl2;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -741,7 +797,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rnadint.remoteControl2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -757,6 +813,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"remoteControl2/Preview Content\"";
@@ -764,6 +821,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = remoteControl2;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -774,7 +832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rnadint.remoteControl2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

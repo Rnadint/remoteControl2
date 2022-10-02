@@ -78,7 +78,7 @@ func mac(secretKey: String, message: String) -> String {
 }
 
 
-
+func nothing(){}
 
 func requesting(){
     
@@ -123,17 +123,20 @@ func requesting(){
     task.resume()
 }
 
-     
-     struct ContentView: View {
-     
-         var button = Button("⬤",action:requesting)
-         var body: some View {
-         VStack {
-             button.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.white.opacity(255)))
-         }.padding()
-         }
-     }
-     
+
+ 
+struct ContentView: View {
+
+    var button = Button("",action:requesting)
+    
+    var body: some View {
+    VStack {
+        button.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.yellow.opacity(255)))
+
+        }.padding()
+    }
+}
+ 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
