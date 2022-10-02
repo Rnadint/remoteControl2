@@ -77,28 +77,16 @@ func mac(secretKey: String, message: String) -> String {
   return macData.base64EncodedString()
 }
 
-func isNetworkAvailable() {
-    
-    let url = URL(string: "https://www.google.com")
-    let config = URLSessionConfiguration.default
-    let session = URLSession(configuration: config)
-    let task = session.dataTask(with: url!) { (data, response, error) in
-        
-        if data != nil && error == nil {
-            print(1)
-        } else {
-            print(0)
-        }
-    }
-    task.resume()
-}
+
+
 
 func requesting(){
     
-    let token = "fc55c8050857478b08baa7ef1745bee8c424f05018b7b0dd192c249af9811d9b1ccd42d17817a48acde623e59e996bd4"
-    let secret = "7a84f82a5915b97dd51af746c21969f8"
-    let nonce = ""
     
+    WKInterfaceDevice.current().play(.start)
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+        WKInterfaceDevice.current().play(.success)
+    })
     let t = Date().millisecondsSince1970
     
     let sign = token+String(t)+nonce
@@ -110,7 +98,9 @@ func requesting(){
         return
     }
     
-    guard let requestUrl = URL(string: "https://api.switch-bot.com/v1.1/devices/E771EB8573B8/commands") else { return }
+    
+    let urlString = "https://api.switch-bot.com/v1.1/devices/"+device_name+"/commands"
+    guard let requestUrl = URL(string:urlString) else { return }
     
     var request = URLRequest(url: requestUrl, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval:10.0)
     request.httpMethod = "POST"
@@ -121,42 +111,12 @@ func requesting(){
     request.setValue(String(t), forHTTPHeaderField: "t")
     request.setValue(nonce, forHTTPHeaderField: "nonce")
     request.httpBody = jsonData
-    WKInterfaceDevice.current().play(.success)
     let config = URLSessionConfiguration.default
     config.waitsForConnectivity = true
     
     let task = URLSession(configuration: config).dataTask(with: request){data, response, error in
         guard error == nil else {
-            print("Error: error calling POST")
-            print(error!)
-            return
-        }
-        guard let data = data else {
-            print("Error: Did not receive data")
-            return
-        }
-        guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-            print("Error: HTTP request failed")
-            print(response!)
-            return
-        }
-        do {
-            guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                print("Error: Cannot convert data to JSON object")
-                return
-            }
-            guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                print("Error: Cannot convert JSON object to Pretty JSON data")
-                return
-            }
-            guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                print("Error: Couldn't print JSON in String")
-                return
-            }
-            print(prettyPrintedJson)
-            
-        } catch {
-            print("Error: Trying to convert JSON data to string")
+            print(response ?? 0)
             return
         }
     }
@@ -169,10 +129,7 @@ func requesting(){
          var button = Button("⬤",action:requesting)
          var body: some View {
          VStack {
-             Text("Click Me").font(.system(size: 24.0))
              button.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.white.opacity(255)))
-             Text(" ").font(.system(size: 12.0))
-         
          }.padding()
          }
      }
