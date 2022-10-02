@@ -2,8 +2,9 @@
 use apple watch to control your switchbot
 
 need to implement:
-token.swift (under 
--> device_name = ""
--> token = ""
--> secrete = ""
--> nonce = ""
+token.swift (under remoteControl2 Watch App)
+
+-> device_name = "" \
+-> token = "" \
+-> secrete = "" \
+-> nonce = "" 
