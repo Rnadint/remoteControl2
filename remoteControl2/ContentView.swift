@@ -83,27 +83,7 @@ func mac(secretKey: String, message: String) -> String {
   return macData.base64EncodedString()
 }
 
-func isNetworkAvailable() {
-    
-    let url = URL(string: "https://www.google.com")
-    let config = URLSessionConfiguration.default
-    let session = URLSession(configuration: config)
-    let task = session.dataTask(with: url!) { (data, response, error) in
-        
-        if data != nil && error == nil {
-            print(1)
-        } else {
-            print(0)
-        }
-    }
-    task.resume()
-}
-
 func requesting(){
-    
-    let token = "fc55c8050857478b08baa7ef1745bee8c424f05018b7b0dd192c249af9811d9b1ccd42d17817a48acde623e59e996bd4"
-    let secret = "7a84f82a5915b97dd51af746c21969f8"
-    let nonce = ""
     
     let t = Date().millisecondsSince1970
     
@@ -116,7 +96,9 @@ func requesting(){
         return
     }
     
-    guard let requestUrl = URL(string: "https://api.switch-bot.com/v1.1/devices/E771EB8573B8/commands") else { return }
+    let urlString = "https://api.switch-bot.com/v1.1/devices/"+device_name+"/commands"
+    
+    guard let requestUrl = URL(string: urlString) else { return }
     
     var request = URLRequest(url: requestUrl, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval:10.0)
     request.httpMethod = "POST"
@@ -173,7 +155,7 @@ func requesting(){
 struct ContentView: View {
     var body: some View {
         VStack {
-            Button("Hello, world!", action: requesting)
+            Button("⬤", action: requesting)
         }
         .padding()
     }
