@@ -166,14 +166,21 @@ func requesting(){
      
      struct ContentView: View {
      
-     var button = Button("",action:requesting)
-     
-     var body: some View {
-     VStack {
-     button.frame(width: 50)
-     
-     }.padding()
-     Text("").padding()
+         var button = Button("⬤",action:requesting)
+         var body: some View {
+         VStack {
+             Text("Click Me").font(.system(size: 24.0))
+             button.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.white.opacity(255)))
+             Text(" ").font(.system(size: 12.0))
+         
+         }.padding()
+         }
      }
-     }
      
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
