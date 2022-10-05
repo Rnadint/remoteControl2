@@ -77,22 +77,61 @@ func mac(secretKey: String, message: String) -> String {
   return macData.base64EncodedString()
 }
 
-
-func nothing(){}
-
-func requesting(){
+struct get_data{
     
-    
-    WKInterfaceDevice.current().play(.start)
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-        WKInterfaceDevice.current().play(.success)
-    })
+}
+
+func change_stat_sub(){
+    WKInterfaceDevice.current().play(.click)
+
     let t = Date().millisecondsSince1970
     
     let sign = token+String(t)+nonce
     let digest = mac(secretKey: secret, message: sign)
     
-    let data = json(command: "turnOn",parameter: "default",commandType: "command")
+    guard let url = URL(string: "https://api.switch-bot.com/v1.1/devices/"+secondary_device+"/status") else {return}
+    
+    var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval:10.0)
+    request.httpMethod = "GET"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
+    request.setValue(digest, forHTTPHeaderField:"sign")
+    request.setValue(String(t), forHTTPHeaderField: "t")
+    request.setValue(nonce, forHTTPHeaderField: "nonce")
+    let config = URLSessionConfiguration.default
+    config.waitsForConnectivity = true
+    let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+        guard let data = data else { return }
+        do {
+            let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+            if let jsonResult = result!["body"] as? Dictionary<String, AnyObject> {
+                let power = jsonResult["power"]
+                if (power as! String=="on"){
+                    post(command: "turnOff", device_name: secondary_device)
+                }
+                else{
+                    post(command: "turnOn", device_name: secondary_device)
+                }
+            }
+        } catch {
+            print("errorMsg")
+        }
+    }
+    task.resume()
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            WKInterfaceDevice.current().play(.success)
+        })
+}
+
+func post(command: String, device_name: String){
+    
+    let t = Date().millisecondsSince1970
+    
+    let sign = token+String(t)+nonce
+    let digest = mac(secretKey: secret, message: sign)
+    
+    let data = json(command: command,parameter: "default",commandType: "command")
     
     guard let jsonData = try? JSONEncoder().encode(data) else{
         return
@@ -111,6 +150,7 @@ func requesting(){
     request.setValue(String(t), forHTTPHeaderField: "t")
     request.setValue(nonce, forHTTPHeaderField: "nonce")
     request.httpBody = jsonData
+    
     let config = URLSessionConfiguration.default
     config.waitsForConnectivity = true
     
@@ -123,16 +163,78 @@ func requesting(){
     task.resume()
 }
 
+func change_stat_main(){
 
- 
-struct ContentView: View {
+    WKInterfaceDevice.current().play(.click)
 
-    var button = Button("",action:requesting)
+    let t = Date().millisecondsSince1970
     
-    var body: some View {
-    VStack {
-        button.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.yellow.opacity(255)))
+    let sign = token+String(t)+nonce
+    let digest = mac(secretKey: secret, message: sign)
+    
+    guard let url = URL(string: "https://api.switch-bot.com/v1.1/devices/"+main_device_name+"/status") else {return}
+    
+    var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval:10.0)
+    request.httpMethod = "GET"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
+    request.setValue(digest, forHTTPHeaderField:"sign")
+    request.setValue(String(t), forHTTPHeaderField: "t")
+    request.setValue(nonce, forHTTPHeaderField: "nonce")
+    let config = URLSessionConfiguration.default
+    config.waitsForConnectivity = true
+    let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+        guard let data = data else { return }
+        do {
+            let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+            if let jsonResult = result!["body"] as? Dictionary<String, AnyObject> {
+                let power = jsonResult["power"]
+                if (power as! String=="on"){
+                    
+                    post(command: "turnOff", device_name: main_device_name)
+                    
+                            
+                    
+                }
+                else{
+                    
+                    post(command: "turnOn", device_name: main_device_name)
+                
+                    
+                }
+            }
+        } catch {
+            print("errorMsg")
+        }
+    }
+    task.resume()
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            WKInterfaceDevice.current().play(.success)
+        })
+}
 
+func plusOne(){
+    WKInterfaceDevice.current().play(.click)
+}
+ 
+
+struct ContentView: View {
+    @State public var all = false
+    var button_white = Button("",action:change_stat_main)
+    var button_gray = Button("",action:change_stat_sub)
+    var body: some View {
+        VStack {
+            HStack{
+                button_white.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.white.opacity(255)))
+                Text("           ")
+            }
+            HStack{
+                Text("           ")
+                button_gray.frame(width: 50).buttonStyle(BorderedButtonStyle(tint: Color.gray.opacity(255)))
+                
+            }
+            
         }.padding()
     }
 }

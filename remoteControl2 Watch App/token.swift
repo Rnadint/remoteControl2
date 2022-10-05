@@ -7,7 +7,9 @@
 
 import Foundation
 
-let device_name = "E771EB8573B8"
-let token = "fc55c8050857478b08baa7ef1745bee8c424f05018b7b0dd192c249af9811d9b1ccd42d17817a48acde623e59e996bd4"
-let secret = "7a84f82a5915b97dd51af746c21969f8"
+let main_device_name = "6055F92A19C6"
+let secondary_device = "E771EB8573B8"
+let token = "fc55c8050857478b08baa7ef1745bee8c424f05018b7b0dd192c249af9811d9b3ce821d70a86855025c0473a196a07e6"
+let secret = "87a728323419d3617bb26f8fff4990c2"
 let nonce = ""
+

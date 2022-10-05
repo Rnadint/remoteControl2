@@ -83,8 +83,39 @@ func mac(secretKey: String, message: String) -> String {
   return macData.base64EncodedString()
 }
 
-func requesting(){
+func get_stat(){
+    let t = Date().millisecondsSince1970
     
+    let sign = token+String(t)+nonce
+    let digest = mac(secretKey: secret, message: sign)
+    
+    guard let url = URL(string: "https://api.switch-bot.com/v1.1/devices/"+device_name+"/status") else { return }
+    
+    var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval:10.0)
+    request.httpMethod = "GET"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
+    request.setValue(digest, forHTTPHeaderField:"sign")
+    request.setValue(String(t), forHTTPHeaderField: "t")
+    request.setValue(nonce, forHTTPHeaderField: "nonce")
+    let config = URLSessionConfiguration.default
+    config.waitsForConnectivity = true
+    
+    let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+        guard let data = data else { return }
+        
+        print(String(data: data, encoding: .utf8)!)
+    }
+    print(1)
+    task.resume()
+    
+    
+    
+    
+}
+
+func requesting(){
     let t = Date().millisecondsSince1970
     
     let sign = token+String(t)+nonce
@@ -95,6 +126,8 @@ func requesting(){
     guard let jsonData = try? JSONEncoder().encode(data) else{
         return
     }
+    
+    
     
     let urlString = "https://api.switch-bot.com/v1.1/devices/"+device_name+"/commands"
     
